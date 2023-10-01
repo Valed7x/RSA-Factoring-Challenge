@@ -1,0 +1,34 @@
+#!/usr/bin/python3
+
+
+import time
+import sys
+
+def factorize(n):
+
+    for p in range(2, n // 2 + 1):
+        if n % p == 0:
+            return f"{n}={p}*{n // p}"
+    return f"{n}={n}*1"
+
+def main(filename):
+
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                number = int(line.strip())
+                factorization = factorize(number)
+                print(factorization)
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found.")
+    except ValueError:
+        print("Error: Invalid input in the file. All lines must be valid natural numbers greater than 1.")
+
+if __name__ == "__main__":
+
+    if len(sys.argv) != 2:
+        print("Usage: factors.py <file>")
+        sys.exit(1)
+
+    filename = sys.argv[1]
+    main(filename)
